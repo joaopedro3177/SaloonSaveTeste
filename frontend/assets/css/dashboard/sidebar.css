@@ -1,0 +1,106 @@
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: min(88vw, 300px);
+  padding: 22px 18px;
+  background: var(--color-elevated-bg);
+  backdrop-filter: blur(18px);
+  border-right: 1px solid var(--color-border);
+  transform: translateX(-104%);
+  transition: transform var(--transition-base);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.sidebar-brand {
+  min-width: 0;
+}
+
+.sidebar-nav {
+  display: grid;
+  gap: 8px;
+}
+
+.sidebar-section-label {
+  padding: 0 12px;
+  color: var(--color-text-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  transition: background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+}
+
+.sidebar-nav a:hover {
+  background: var(--color-primary-ghost);
+  color: var(--color-primary);
+  transform: translateX(2px);
+}
+
+.sidebar-nav a.active {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: #fff;
+  box-shadow: 0 16px 28px rgba(124, 58, 237, 0.22);
+}
+
+.sidebar-nav a i {
+  width: 20px;
+  text-align: center;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(91, 33, 182, 0.08));
+  border: 1px solid rgba(124, 58, 237, 0.14);
+}
+
+.sidebar-footer strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.sidebar-footer p {
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 992px) {
+  .sidebar {
+    position: sticky;
+    top: 0;
+    width: 300px;
+    height: 100vh;
+    transform: none;
+  }
+
+  .close-sidebar {
+    display: none;
+  }
+}

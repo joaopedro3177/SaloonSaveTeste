@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda | Saloon Save</title>
+  <script src="../../assets/js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/dashboard/base.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard/sidebar.css">
+  <link rel="stylesheet" href="../../assets/css/dashboard/agenda.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="dashboard-shell" data-root="../.." data-page="agenda">
+  <div id="header-container"></div>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <main class="content">
+      <header class="content-header">
+        <div>
+          <span class="page-kicker"><i class="fas fa-calendar-days"></i> Organizacao diaria</span>
+          <h1>Agenda do dia</h1>
+          <p class="page-lead">Controle de agendamentos.</p>
+        </div>
+
+        <div class="header-actions">
+          <a class="btn-secondary" href="../index.html"><i class="fas fa-chart-line"></i> Ver dashboard</a>
+          <button class="btn-primary" type="button" id="openAgendaModal"><i class="fas fa-plus"></i> Novo agendamento</button>
+        </div>
+      </header>
+
+      <section class="agenda-layout">
+        <div class="agenda-board surface-card">
+          <div class="panel-card-header">
+            <div>
+              <h2>Atendimentos</h2>
+              <p class="section-note" id="agendaCount">0 agendamentos</p>
+            </div>
+          </div>
+
+          <div class="agenda-timeline" id="agendaTimeline"></div>
+        </div>
+
+        <aside class="agenda-summary surface-card">
+          <div class="panel-card-header">
+            <div>
+              <h2>Resumo rapido</h2>
+              <p class="section-note">Dados do dia.</p>
+            </div>
+          </div>
+
+          <ul class="agenda-list" id="agendaResumo"></ul>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="agendaModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="agendaModalTitle">Novo agendamento</h3>
+        <button class="close-sidebar" id="closeAgendaModal" type="button" aria-label="Fechar modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form id="agendaForm">
+        <input type="hidden" id="agenId">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="agenData">Data</label>
+            <input type="date" id="agenData" required>
+          </div>
+          <div class="form-group">
+            <label for="agenHora">Hora</label>
+            <input type="time" id="agenHora" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="agenCliente">Cliente</label>
+          <input type="text" id="agenCliente" required placeholder="Nome do cliente">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="agenFuncionario">Funcionario</label>
+            <input type="text" id="agenFuncionario" required placeholder="Nome do funcionario">
+          </div>
+          <div class="form-group">
+            <label for="agenServico">Servico</label>
+            <input type="text" id="agenServico" required placeholder="Servico agendado">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="agenStatus">Status</label>
+            <select id="agenStatus" required>
+              <option value="confirmado">Confirmado</option>
+              <option value="pendente">Pendente</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="agenObservacoes">Observacoes</label>
+            <input type="text" id="agenObservacoes" placeholder="Observacoes do agendamento">
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" id="cancelAgendaBtn">Cancelar</button>
+          <button type="submit" class="btn-save">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../../assets/js/dashboard/layout.js"></script>
+  <script src="../../assets/js/dashboard/agenda.js"></script>
+</body>
+</html>

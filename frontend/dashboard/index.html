@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | Saloon Save</title>
+  <script src="../assets/js/theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/dashboard/base.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/sidebar.css">
+  <link rel="stylesheet" href="../assets/css/dashboard/home.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="dashboard-shell" data-root=".." data-page="dashboard">
+  <div id="header-container"></div>
+  <div class="layout">
+    <div id="sidebar-container"></div>
+
+    <main class="content">
+      <header class="content-header">
+        <div>
+          <span class="page-kicker"><i class="fas fa-sparkles"></i> Visao geral</span>
+          <h1>Dashboard</h1>
+          <p class="page-lead">Painel administrativo do Saloon Save.</p>
+        </div>
+
+        <div class="header-actions">
+          <a class="btn-secondary" href="../form.html"><i class="fas fa-arrow-left"></i> Voltar para acesso</a>
+          <a class="btn-primary" href="./pages/agenda.html"><i class="fas fa-calendar-days"></i> Ver agenda</a>
+        </div>
+      </header>
+
+      <section class="dashboard-grid">
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-icon"><i class="fas fa-calendar-check"></i></span>
+              <span class="stat-card-trend">Hoje</span>
+            </div>
+            <div>
+              <strong>12</strong>
+              <span>Agendamentos hoje</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-icon"><i class="fas fa-user-tie"></i></span>
+              <span class="stat-card-trend">Equipe</span>
+            </div>
+            <div>
+              <strong>6</strong>
+              <span>Profissionais ativos</span>
+            </div>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-card-header">
+              <span class="stat-card-icon"><i class="fas fa-clock"></i></span>
+              <span class="stat-card-trend">Pendentes</span>
+            </div>
+            <div>
+              <strong>2</strong>
+              <span>Confirmacoes aguardando retorno</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-panels">
+          <section class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h2>Resumo da agenda</h2>
+                <p class="section-note">Atendimentos do dia.</p>
+              </div>
+              <a href="./pages/agenda.html">Abrir agenda</a>
+            </div>
+
+            <div class="schedule-list">
+              <article class="schedule-item">
+                <span class="schedule-item-time">09:00</span>
+                <div>
+                  <strong>Maria</strong>
+                  <small>Corte Feminino</small>
+                </div>
+                <span class="status-pill confirmado">Confirmado</span>
+              </article>
+
+              <article class="schedule-item">
+                <span class="schedule-item-time">10:30</span>
+                <div>
+                  <strong>Joao</strong>
+                  <small>Barba</small>
+                </div>
+                <span class="status-pill confirmado">Confirmado</span>
+              </article>
+
+              <article class="schedule-item">
+                <span class="schedule-item-time">14:00</span>
+                <div>
+                  <strong>Ana</strong>
+                  <small>Escova</small>
+                </div>
+                <span class="status-pill pendente">Pendente</span>
+              </article>
+
+              <article class="schedule-item">
+                <span class="schedule-item-time">16:00</span>
+                <div>
+                  <strong>Carlos</strong>
+                  <small>Corte Degrade</small>
+                </div>
+                <span class="status-pill confirmado">Confirmado</span>
+              </article>
+            </div>
+          </section>
+
+          <aside class="panel-card">
+            <div class="panel-card-header">
+              <div>
+                <h2>Acessos rapidos</h2>
+                <p class="section-note">Rotas principais do painel.</p>
+              </div>
+            </div>
+
+            <div class="quick-actions">
+              <a class="quick-action" href="./pages/agenda.html">
+                <i class="fas fa-calendar-days"></i>
+                <div>
+                  <strong>Agenda</strong>
+                  <small>Horarios do dia.</small>
+                </div>
+              </a>
+
+              <a class="quick-action" href="./pages/profissionais.html">
+                <i class="fas fa-user-tie"></i>
+                <div>
+                  <strong>Profissionais</strong>
+                  <small>Equipe cadastrada.</small>
+                </div>
+              </a>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="../assets/js/dashboard/layout.js"></script>
+</body>
+</html>

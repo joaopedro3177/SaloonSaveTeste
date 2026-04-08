@@ -1,0 +1,93 @@
+ATUALIZACOES DO PROJETO SALOON SAVE
+
+Data:
+2026-04-07
+
+Resumo geral:
+- Reorganizacao da estrutura para separar melhor front-end e back-end.
+- Padronizacao visual da dashboard com a mesma paleta da landing page e do formulario.
+- Liberacao temporaria da dashboard sem validacao do back-end.
+- Integracao apenas do que ja existia no rascunho da dashboard, sem expandir modulos novos.
+- Ajuste dos textos da interface para ficarem mais neutros e naturais.
+- Agenda com cadastro, edicao e exclusao no front usando campos proximos ao modelo logico.
+- Ajuste da marca na dashboard com simbolo mais limpo no lugar da imagem anterior.
+- Remocao dos itens soltos de clientes, servicos, estoque e financeiro do menu lateral.
+- Limpeza da home da dashboard para manter foco apenas em agenda e profissionais.
+- Aplicacao da logo oficial em landing, formulario e dashboard com tamanhos ajustados.
+- Substituicao da logo pela versao sem fundo e renomeacao para saloon-logo.png.
+- Ajuste visual da logo no formulario e na dashboard para melhorar leitura e alinhamento.
+- Logo do formulario movida para a area da direita para melhorar destaque e legibilidade.
+- Centralizacao da logo do footer da landing no mobile.
+- Logo do formulario ampliada e sem linha de separacao abaixo.
+- Logo do formulario reposicionada um pouco mais abaixo no card.
+- Ajuste responsivo do formulario para evitar quebra no cadastro no mobile.
+- Header mobile da dashboard ajustado para centralizar melhor a logo e ampliar a marca.
+- Backend mantido apenas com estrutura base, sem implementacao, para o outro integrante continuar depois.
+- Limpeza final da estrutura com remocao de pastas vazias e sobras da organizacao antiga.
+- Implementacao de tema claro e escuro em landing, formulario e dashboard com preferencia salva.
+
+Estrutura criada/ajustada:
+- frontend/index.html -> landing page
+- frontend/form.html -> tela de acesso/cadastro
+- frontend/dashboard/index.html -> pagina principal da dashboard
+- frontend/dashboard/pages/ -> paginas internas da dashboard
+- frontend/assets/css/shared/theme.css -> variaveis globais de tema
+- frontend/assets/css/dashboard/ -> estilos da area interna
+- frontend/assets/js/dashboard/ -> scripts da dashboard
+- backend/src/config
+- backend/src/controllers
+- backend/src/middlewares
+- backend/src/models
+- backend/src/routes
+- backend/src/services
+- backend/src/utils
+
+Mudancas no front-end:
+- Inclusao de link para a dashboard na landing page.
+- Login e confirmacao de cadastro redirecionando para a dashboard enquanto a autenticacao real nao existe.
+- Dashboard principal reorganizada com base no conteudo que ja existia.
+- Tela de agenda reorganizada com o conteudo original do rascunho.
+- Tela de profissionais ajustada com modal, cadastro, edicao e exclusao.
+- Remocao de avisos e textos explicativos que deixavam a interface artificial.
+- Agenda ajustada para permitir editar horarios, cliente, funcionario, servico, status e observacoes.
+- Marca da dashboard simplificada para melhorar a leitura no menu e no cabecalho mobile.
+- Menu lateral reduzido para mostrar apenas as paginas que realmente existem.
+- Cards e textos da tela inicial ajustados para nao sugerirem modulos que nao estao prontos.
+- Logo oficial distribuida nas telas com dimensoes mais equilibradas.
+- Versao sem fundo aplicada com tamanho um pouco maior na landing, formulario e dashboard.
+- Logo centralizada e ampliada na dashboard, com remocao do texto repetido no cabecalho mobile.
+- Logo do formulario recebeu fundo de apoio para funcionar melhor sobre o painel roxo.
+- Logo do formulario reposicionada acima das abas de acesso e cadastro.
+- Rodape da landing ajustado para manter a logo centralizada em telas menores.
+- Topo do card do formulario simplificado para destacar melhor a marca.
+- Espacamento superior da logo do formulario ajustado.
+- Tamanho da logo reduzido no formulario mobile para manter o cadastro estavel.
+- Header mobile da dashboard refeito com grade de alinhamento para centralizacao real da logo.
+- Tema global criado com variaveis compartilhadas e alternancia persistente em localStorage.
+- Botoes de troca de tema adicionados nas telas publicas e na dashboard.
+
+Padronizacao visual:
+- Uso de paleta roxa principal em toda a aplicacao.
+- Unificacao de sombras, bordas, cores e componentes.
+- Melhoria da responsividade da dashboard para desktop e mobile.
+
+Arquivos importantes:
+- README.md
+- backend/README.md
+- frontend/assets/css/shared/theme.css
+- frontend/assets/css/dashboard/base.css
+- frontend/assets/css/dashboard/sidebar.css
+- frontend/assets/css/dashboard/home.css
+- frontend/assets/css/dashboard/agenda.css
+- frontend/assets/css/dashboard/profissionais.css
+- frontend/assets/js/form.js
+- frontend/assets/js/dashboard/agenda.js
+- frontend/assets/js/dashboard/layout.js
+- frontend/assets/js/dashboard/profissionais.js
+- frontend/assets/img/branding/saloon-logo.png
+
+Observacao:
+- Os arquivos frontend/dashboard/components/header.html e frontend/dashboard/components/sidebar.html foram esvaziados para nao deixar comentarios no codigo.
+- O layout atual da dashboard e montado via JavaScript em frontend/assets/js/dashboard/layout.js.
+- A pasta backend foi deixada neutra, somente com a estrutura de pastas e README simples.
+- As pastas frontend/app, js, styles e assets da raiz foram removidas por nao estarem em uso.

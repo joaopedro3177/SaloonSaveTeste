@@ -1,0 +1,127 @@
+:root {
+  color-scheme: light;
+  --color-primary: #7c3aed;
+  --color-primary-dark: #5b21b6;
+  --color-primary-soft: #ede9fe;
+  --color-primary-ghost: rgba(124, 58, 237, 0.12);
+  --color-success: #16a34a;
+  --color-success-bg: #ecfdf3;
+  --color-warning: #c2410c;
+  --color-warning-bg: #fff7ed;
+  --color-danger: #b91c1c;
+  --color-danger-bg: #fee2e2;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8fafc;
+  --color-surface-muted: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-text-soft: #94a3b8;
+  --color-footer-bg: #0f172a;
+  --color-footer-text: #94a3b8;
+  --color-body-gradient: linear-gradient(180deg, #ffffff 0%, #fbfaff 40%, #f8fafc 100%);
+  --color-dashboard-gradient: radial-gradient(circle at top left, rgba(124, 58, 237, 0.08), transparent 28%), linear-gradient(180deg, #fcfbff 0%, #f8fafc 100%);
+  --color-elevated-bg: rgba(255, 255, 255, 0.94);
+  --color-overlay: rgba(15, 23, 42, 0.45);
+  --color-input-bg: #f1f5f9;
+  --color-input-focus: #ffffff;
+  --feature-icon-filter: brightness(0);
+  --feature-icon-hover-filter: invert(31%) sepia(94%) saturate(4520%) hue-rotate(253deg) brightness(96%) contrast(96%);
+  --shadow-sm: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 18px 48px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 24px 64px rgba(124, 58, 237, 0.16);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --transition-base: 0.3s ease;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --color-primary: #8b5cf6;
+  --color-primary-dark: #6d28d9;
+  --color-primary-soft: #2b1c50;
+  --color-primary-ghost: rgba(139, 92, 246, 0.18);
+  --color-success: #4ade80;
+  --color-success-bg: rgba(34, 197, 94, 0.16);
+  --color-warning: #fdba74;
+  --color-warning-bg: rgba(249, 115, 22, 0.18);
+  --color-danger: #fca5a5;
+  --color-danger-bg: rgba(239, 68, 68, 0.18);
+  --color-surface: #111827;
+  --color-surface-alt: #0f172a;
+  --color-surface-muted: #1e293b;
+  --color-border: #243244;
+  --color-border-strong: #334155;
+  --color-text: #f8fafc;
+  --color-text-muted: #cbd5e1;
+  --color-text-soft: #94a3b8;
+  --color-footer-bg: #020617;
+  --color-footer-text: #94a3b8;
+  --color-body-gradient: linear-gradient(180deg, #09090f 0%, #0f172a 100%);
+  --color-dashboard-gradient: radial-gradient(circle at top left, rgba(139, 92, 246, 0.18), transparent 28%), linear-gradient(180deg, #09090f 0%, #0f172a 100%);
+  --color-elevated-bg: rgba(15, 23, 42, 0.92);
+  --color-overlay: rgba(2, 6, 23, 0.72);
+  --color-input-bg: #0f172a;
+  --color-input-focus: #111827;
+  --feature-icon-filter: brightness(0) invert(1);
+  --feature-icon-hover-filter: invert(48%) sepia(87%) saturate(2096%) hue-rotate(233deg) brightness(102%) contrast(94%);
+  --shadow-sm: 0 12px 32px rgba(2, 6, 23, 0.38);
+  --shadow-md: 0 22px 56px rgba(2, 6, 23, 0.48);
+  --shadow-lg: 0 26px 72px rgba(76, 29, 149, 0.36);
+}
+
+.theme-toggle {
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: var(--color-elevated-bg);
+  color: var(--color-text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform var(--transition-base), border-color var(--transition-base), background var(--transition-base), color var(--transition-base);
+  backdrop-filter: blur(12px);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+  border-color: rgba(124, 58, 237, 0.28);
+  background: var(--color-primary-ghost);
+}
+
+.theme-toggle-icon {
+  width: 18px;
+  text-align: center;
+}
+
+.theme-toggle.mobile {
+  width: 44px;
+  min-width: 44px;
+  padding: 0;
+}
+
+.theme-toggle.mobile .theme-toggle-label {
+  display: none;
+}
+
+.theme-toggle.block {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .theme-toggle:not(.mobile) .theme-toggle-label {
+    display: none;
+  }
+
+  .theme-toggle:not(.mobile) {
+    min-width: 44px;
+    padding: 0 12px;
+  }
+}
