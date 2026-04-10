@@ -1,48 +1,5 @@
-const agendaInicial = [
-  {
-    agen_id: 1,
-    agen_data: '2026-04-07',
-    agen_hora: '09:00',
-    cliente_nome: 'Maria',
-    funcionario_nome: 'Camila',
-    serv_nome: 'Corte Feminino',
-    agen_status: 'confirmado',
-    agen_observacoes: 'Atendimento confirmado'
-  },
-  {
-    agen_id: 2,
-    agen_data: '2026-04-07',
-    agen_hora: '10:30',
-    cliente_nome: 'Joao',
-    funcionario_nome: 'Rafael',
-    serv_nome: 'Barba',
-    agen_status: 'confirmado',
-    agen_observacoes: 'Atendimento confirmado'
-  },
-  {
-    agen_id: 3,
-    agen_data: '2026-04-07',
-    agen_hora: '14:00',
-    cliente_nome: 'Ana',
-    funcionario_nome: 'Bianca',
-    serv_nome: 'Escova',
-    agen_status: 'pendente',
-    agen_observacoes: 'Aguardando confirmacao'
-  },
-  {
-    agen_id: 4,
-    agen_data: '2026-04-07',
-    agen_hora: '16:00',
-    cliente_nome: 'Carlos',
-    funcionario_nome: 'Rafael',
-    serv_nome: 'Corte Degrade',
-    agen_status: 'confirmado',
-    agen_observacoes: 'Atendimento confirmado'
-  }
-];
-
-let agendamentos = [...agendaInicial];
-let agendaIdAtual = agendaInicial.length + 1;
+let agendamentos = [];
+let agendaIdAtual = 1;
 
 const agendaTimeline = document.getElementById('agendaTimeline');
 const agendaResumo = document.getElementById('agendaResumo');
@@ -70,6 +27,19 @@ function ordenarAgendamentos() {
     const dataB = `${b.agen_data}T${b.agen_hora}`;
     return dataA.localeCompare(dataB);
   });
+}
+
+// 🔥 CARREGAR DO BANCO
+async function carregarAgendamentos() {
+  try {
+    const response = await fetch("http://localhost:3000/agendamentos");
+    const dados = await response.json();
+
+    agendamentos = dados;
+    renderizarAgenda();
+  } catch (error) {
+    console.error("Erro ao carregar:", error);
+  }
 }
 
 function renderizarAgenda() {
@@ -104,10 +74,10 @@ function renderizarAgenda() {
       </div>
       <span class="status-pill ${item.agen_status}">${capitalizarStatus(item.agen_status)}</span>
       <div class="agenda-actions">
-        <button type="button" onclick="editarAgendamento(${item.agen_id})" aria-label="Editar agendamento">
+        <button type="button" onclick="editarAgendamento(${item.agen_id})">
           <i class="fas fa-pen"></i>
         </button>
-        <button type="button" class="btn-delete" onclick="removerAgendamento(${item.agen_id})" aria-label="Excluir agendamento">
+        <button type="button" class="btn-delete" onclick="removerAgendamento(${item.agen_id})">
           <i class="fas fa-trash"></i>
         </button>
       </div>
@@ -160,9 +130,27 @@ window.editarAgendamento = (id) => {
   abrirAgendaModal();
 };
 
-window.removerAgendamento = (id) => {
-  agendamentos = agendamentos.filter((agendamento) => agendamento.agen_id !== id);
-  renderizarAgenda();
+window.removerAgendamento = async (id) => {
+  if(!confirm("Tem certeza que deseja excluir este agendamento?")) return;
+  try {
+    const response = await fetch(`http://localhost:3000/agendamentos/${id}`, {
+      method: "DELETE"
+    });
+
+
+    if(response.ok) {
+      agendamentos = agendamentos.filter((agendamento) => agendamento.agen_id !== id);
+      renderizarAgenda();
+      console.log(`Agendamento ${id} removido com sucesso`);
+    } else {
+      alert("Não foi possível excluir o agendamento no banco de dados.");
+    }
+    } catch (error) {
+      console.error("Erro ao deletar:", error);
+      alert("Erro de conexão com o servidor.");
+  }
+
+  
 };
 
 document.getElementById('openAgendaModal').addEventListener('click', abrirAgendaModal);
@@ -175,7 +163,9 @@ agendaModal.addEventListener('click', (event) => {
   }
 });
 
-agendaForm.addEventListener('submit', (event) => {
+
+
+agendaForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const dados = {
@@ -188,19 +178,34 @@ agendaForm.addEventListener('submit', (event) => {
     agen_observacoes: agenObservacoes.value
   };
 
-  if (agenId.value) {
-    const indice = agendamentos.findIndex((item) => item.agen_id === Number(agenId.value));
-    agendamentos[indice] = { ...agendamentos[indice], ...dados };
-  } else {
-    agendamentos.push({
-      agen_id: agendaIdAtual,
-      ...dados
-    });
-    agendaIdAtual += 1;
+  try {
+    if (agenId.value) {
+      // UPDATE
+      await fetch(`http://localhost:3000/agendamentos/${agenId.value}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+      });
+    } else {
+      // CREATE
+      await fetch("http://localhost:3000/agendamentos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dados)
+      });
+    }
+
+    carregarAgendamentos();
+  } catch (error) { 
+    console.error("Erro ao salvar:", error);
   }
 
   fecharAgendaModal();
-  renderizarAgenda();
 });
 
-renderizarAgenda();
+// 🔥 INICIA CARREGANDO DO BANCO
+carregarAgendamentos(); 
