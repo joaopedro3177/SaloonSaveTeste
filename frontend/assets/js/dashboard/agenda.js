@@ -1,5 +1,4 @@
 let agendamentos = [];
-let agendaIdAtual = 1;
 
 const agendaTimeline = document.getElementById('agendaTimeline');
 const agendaResumo = document.getElementById('agendaResumo');
@@ -34,7 +33,6 @@ async function carregarAgendamentos() {
   try {
     const response = await fetch("http://localhost:3000/agendamentos");
     const dados = await response.json();
-
     agendamentos = dados;
     renderizarAgenda();
   } catch (error) {
@@ -137,7 +135,6 @@ window.removerAgendamento = async (id) => {
       method: "DELETE"
     });
 
-
     if(response.ok) {
       agendamentos = agendamentos.filter((agendamento) => agendamento.agen_id !== id);
       renderizarAgenda();
@@ -145,14 +142,13 @@ window.removerAgendamento = async (id) => {
     } else {
       alert("Não foi possível excluir o agendamento no banco de dados.");
     }
-    } catch (error) {
+  } catch (error) {
       console.error("Erro ao deletar:", error);
       alert("Erro de conexão com o servidor.");
   }
-
-  
 };
 
+// EVENTOS DE BOTÕES
 document.getElementById('openAgendaModal').addEventListener('click', abrirAgendaModal);
 document.getElementById('closeAgendaModal').addEventListener('click', fecharAgendaModal);
 document.getElementById('cancelAgendaBtn').addEventListener('click', fecharAgendaModal);
@@ -163,11 +159,11 @@ agendaModal.addEventListener('click', (event) => {
   }
 });
 
-
-
+// 🔥 SALVAR / ATUALIZAR COM TRATAMENTO DE ERROS
 agendaForm.addEventListener('submit', async (event) => {
   event.preventDefault();
 
+  const id = agenId.value;
   const dados = {
     agen_data: agenData.value,
     agen_hora: agenHora.value,
@@ -178,34 +174,35 @@ agendaForm.addEventListener('submit', async (event) => {
     agen_observacoes: agenObservacoes.value
   };
 
+  const url = id ? `http://localhost:3000/agendamentos/${id}` : "http://localhost:3000/agendamentos";
+  const metodo = id ? "PUT" : "POST";
+
   try {
-    if (agenId.value) {
-      // UPDATE
-      await fetch(`http://localhost:3000/agendamentos/${agenId.value}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-      });
-    } else {
-      // CREATE
-      await fetch("http://localhost:3000/agendamentos", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(dados)
-      });
+    const response = await fetch(url, {
+      method: metodo,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dados)
+    });
+
+    const resultado = await response.json();
+
+    if (!response.ok) {
+      // Aqui tratamos o erro 400 (como conflito de horário ou nomes não encontrados)
+      alert(resultado.erro || "Erro ao salvar agendamento");
+      return; // Mantém o modal aberto para o usuário corrigir
     }
 
+    alert(id ? "Agendamento atualizado!" : "Agendamento criado com sucesso!");
     carregarAgendamentos();
+    fecharAgendaModal();
+    
   } catch (error) { 
     console.error("Erro ao salvar:", error);
+    alert("Erro crítico de conexão com o servidor.");
   }
-
-  fecharAgendaModal();
 });
 
-// 🔥 INICIA CARREGANDO DO BANCO
-carregarAgendamentos(); 
+// INICIALIZAÇÃO
+carregarAgendamentos();
